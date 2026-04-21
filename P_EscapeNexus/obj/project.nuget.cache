@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+Dn4vgKnsZ0=",
+  "dgSpecHash": "mSybKA+cRhU=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Admin\\Documents\\GitHub\\SantaClash\\P_EscapeNexus\\P_EscapeNexus\\P_EscapeNexus.csproj",
+  "projectFilePath": "C:\\Users\\Admin\\Documents\\GitHub\\escapeNexus\\P_EscapeNexus\\P_EscapeNexus.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.netcore.app\\2.1.30\\microsoft.netcore.app.2.1.30.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.netcore.dotnetapphost\\2.1.30\\microsoft.netcore.dotnetapphost.2.1.30.nupkg.sha512",
