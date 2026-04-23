@@ -30,10 +30,6 @@ namespace P_EscapeNexus
         private SpriteBatch _spriteBatch;
 
         private GameStateManager currentState;
-        private Texture2D TextureIntro1;
-        private Texture2D TextureIntro2;
-        private Texture2D TextureIntro3;
-        private Texture2D TextureIntro4;
         private Texture2D menuTexture;
         private Texture2D _debugTexture;
         private Texture2D textureBtnStart;
@@ -41,7 +37,10 @@ namespace P_EscapeNexus
         private Texture2D textureBtnReglage;
         private Texture2D textureBtnMute;
         private Texture2D textureBtnPlay;
-        
+        private Texture2D textureMurPorteBadge;
+        private Texture2D textureInventaire;
+        private Texture2D textureCommande;
+
         // IA Probleme collision voir doc
         bool inputLocked = false;
 
@@ -78,6 +77,9 @@ namespace P_EscapeNexus
             textureBtnReglage = Content.Load<Texture2D>("reglage");
             textureBtnMute = Content.Load<Texture2D>("mute");
             textureBtnPlay = Content.Load<Texture2D>("unmute");
+            textureMurPorteBadge = Content.Load<Texture2D>("murPorteBadge");
+            textureCommande = Content.Load<Texture2D>("commande");
+            textureInventaire = Content.Load<Texture2D>("inventaire");
 
             _debugTexture = new Texture2D(GraphicsDevice, 1, 1);
             _debugTexture.SetData(new[] { Color.White });
@@ -124,7 +126,7 @@ namespace P_EscapeNexus
                     {
                         currentTextureIndex = 0;
                         inputLocked = true;
-                        currentState = GameStateManager.Menu;
+                        currentState = GameStateManager.Playing;
 
                         previousMouseState = Mouse.GetState();
                     }
@@ -137,8 +139,8 @@ namespace P_EscapeNexus
                 Rectangle reglageBtn = new Rectangle(450, 350, _graphics.PreferredBackBufferWidth / 5, _graphics.PreferredBackBufferHeight / 6);
                 Rectangle exitBtn = new Rectangle(450, 480, _graphics.PreferredBackBufferWidth / 5, _graphics.PreferredBackBufferHeight / 6);
                 if (mouseState.LeftButton == ButtonState.Pressed &&
-    previousMouseState.LeftButton == ButtonState.Released &&
-    startBtn.Contains(mouseState.Position))
+                previousMouseState.LeftButton == ButtonState.Released &&
+                startBtn.Contains(mouseState.Position))
                 {
                     currentTextureIndex = 0;
                     currentState = GameStateManager.Intro;
@@ -188,8 +190,8 @@ namespace P_EscapeNexus
                 _spriteBatch.Draw(textureBtnReglage, reglageBtn, Color.White);
                 // Hitbox visible
                 _spriteBatch.Draw(_debugTexture, startBtn, Color.Red * 0.4f);
-                _spriteBatch.Draw(_debugTexture, exitBtn, Color.Blue* 0.4f);
-                _spriteBatch.Draw(_debugTexture, reglageBtn, Color.Green* 0.4f);
+                _spriteBatch.Draw(_debugTexture, exitBtn, Color.Blue * 0.4f);
+                _spriteBatch.Draw(_debugTexture, reglageBtn, Color.Green * 0.4f);
             }
             else if (currentState == GameStateManager.Reglage)
             {
@@ -205,6 +207,12 @@ namespace P_EscapeNexus
                     _spriteBatch.Draw(textureBtnPlay, muteBtn, Color.White); // mute button
 
                 _spriteBatch.Draw(_debugTexture, muteBtn, Color.Red * 0.4f);
+            }
+            else if (currentState == GameStateManager.Playing)
+            {
+                _spriteBatch.Draw(textureMurPorteBadge, new Rectangle(0, 0, _graphics.PreferredBackBufferWidth, _graphics.PreferredBackBufferHeight), Color.White);
+                _spriteBatch.Draw(textureInventaire, new Rectangle(0, 550, _graphics.PreferredBackBufferWidth / 2, _graphics.PreferredBackBufferHeight / 3), Color.White);
+                _spriteBatch.Draw(textureCommande, new Rectangle(720, 490, _graphics.PreferredBackBufferWidth / 3, _graphics.PreferredBackBufferHeight / 3), Color.White);
             }
             _spriteBatch.End();
             base.Draw(gameTime);

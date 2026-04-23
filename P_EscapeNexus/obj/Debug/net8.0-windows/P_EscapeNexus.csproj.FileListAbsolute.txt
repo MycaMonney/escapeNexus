@@ -38,3 +38,9 @@ C:\Users\Admin\Documents\GitHub\escapeNexus\P_EscapeNexus\bin\Debug\net8.0-windo
 C:\Users\Admin\Documents\GitHub\escapeNexus\P_EscapeNexus\bin\Debug\net8.0-windows\Content\SpaceSong.xnb
 C:\Users\Admin\Documents\GitHub\escapeNexus\P_EscapeNexus\bin\Debug\net8.0-windows\Content\mute.xnb
 C:\Users\Admin\Documents\GitHub\escapeNexus\P_EscapeNexus\bin\Debug\net8.0-windows\Content\unmute.xnb
+C:\Users\Admin\Documents\GitHub\escapeNexus\P_EscapeNexus\bin\Debug\net8.0-windows\Content\murPanneauFermer.xnb
+C:\Users\Admin\Documents\GitHub\escapeNexus\P_EscapeNexus\bin\Debug\net8.0-windows\Content\murPanneauOuvert.xnb
+C:\Users\Admin\Documents\GitHub\escapeNexus\P_EscapeNexus\bin\Debug\net8.0-windows\Content\murPorteBadge.xnb
+C:\Users\Admin\Documents\GitHub\escapeNexus\P_EscapeNexus\bin\Debug\net8.0-windows\Content\panneauOuvert.xnb
+C:\Users\Admin\Documents\GitHub\escapeNexus\P_EscapeNexus\bin\Debug\net8.0-windows\Content\commande.xnb
+C:\Users\Admin\Documents\GitHub\escapeNexus\P_EscapeNexus\bin\Debug\net8.0-windows\Content\inventaire.xnb
