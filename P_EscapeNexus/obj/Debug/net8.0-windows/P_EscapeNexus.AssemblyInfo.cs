@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("P_EscapeNexus")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+33da38d46a3b823defa55ae6fd87f08545e20abe")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a07a07666f8ac35f460dd200d1f0a55765fdcab7")]
 [assembly: System.Reflection.AssemblyProductAttribute("P_EscapeNexus")]
 [assembly: System.Reflection.AssemblyTitleAttribute("P_EscapeNexus")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
