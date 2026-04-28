@@ -48,3 +48,11 @@ C:\Users\Admin\Documents\GitHub\escapeNexus\P_EscapeNexus\bin\Debug\net8.0-windo
 C:\Users\Admin\Documents\GitHub\escapeNexus\P_EscapeNexus\bin\Debug\net8.0-windows\Content\flecheDroite.xnb
 C:\Users\Admin\Documents\GitHub\escapeNexus\P_EscapeNexus\bin\Debug\net8.0-windows\Content\flecheGauche.xnb
 C:\Users\Admin\Documents\GitHub\escapeNexus\P_EscapeNexus\bin\Debug\net8.0-windows\Content\badge.xnb
+C:\Users\Admin\Documents\GitHub\escapeNexus\P_EscapeNexus\bin\Debug\net8.0-windows\Content\porteOuverte.xnb
+C:\Users\Admin\Documents\GitHub\escapeNexus\P_EscapeNexus\bin\Debug\net8.0-windows\Content\mur5.xnb
+C:\Users\Admin\Documents\GitHub\escapeNexus\P_EscapeNexus\bin\Debug\net8.0-windows\Content\mur6.xnb
+C:\Users\Admin\Documents\GitHub\escapeNexus\P_EscapeNexus\bin\Debug\net8.0-windows\Content\outilsAvecObj.xnb
+C:\Users\Admin\Documents\GitHub\escapeNexus\P_EscapeNexus\bin\Debug\net8.0-windows\Content\outilsSansObj.xnb
+C:\Users\Admin\Documents\GitHub\escapeNexus\P_EscapeNexus\bin\Debug\net8.0-windows\Content\mur6SansOutils.xnb
+C:\Users\Admin\Documents\GitHub\escapeNexus\P_EscapeNexus\bin\Debug\net8.0-windows\Content\tournevis.xnb
+C:\Users\Admin\Documents\GitHub\escapeNexus\P_EscapeNexus\bin\Debug\net8.0-windows\Content\DefaultFont.xnb

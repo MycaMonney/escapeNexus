@@ -1,2 +1,2 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
-"C:/Users/Admin/Documents/GitHub/escapeNexus/P_EscapeNexus/Content/../../../../../Downloads/badge.png","C:/Users/Admin/Documents/GitHub/escapeNexus/P_EscapeNexus/Content/bin/Windows/badge.xnb","TextureProcessor","Texture2DContent",6161,12373,0,1000038
+"C:/Users/Admin/Documents/GitHub/escapeNexus/P_EscapeNexus/Content/DefaultFont.spritefont","C:/Users/Admin/Documents/GitHub/escapeNexus/P_EscapeNexus/Content/bin/Windows/DefaultFont.xnb","FontDescriptionProcessor","SpriteFontContent",2068,21529,0,1543117

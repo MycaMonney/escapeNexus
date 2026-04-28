@@ -8,6 +8,7 @@
     <File>C:/Users/Admin/Documents/GitHub/escapeNexus/P_EscapeNexus/Content/../../../../../Downloads/commande.png</File>
     <File>C:/Users/Admin/Documents/GitHub/escapeNexus/P_EscapeNexus/Content/../../../../../Downloads/exit.png</File>
     <File>C:/Users/Admin/Documents/GitHub/escapeNexus/P_EscapeNexus/Content/../../../../../Downloads/reglage.png</File>
+    <File>C:/Users/Admin/Documents/GitHub/escapeNexus/P_EscapeNexus/Content/DefaultFont.spritefont</File>
     <File>C:/Users/Admin/Documents/GitHub/escapeNexus/P_EscapeNexus/Content/flecheDroite.png</File>
     <File>C:/Users/Admin/Documents/GitHub/escapeNexus/P_EscapeNexus/Content/flecheGauche.png</File>
     <File>C:/Users/Admin/Documents/GitHub/escapeNexus/P_EscapeNexus/Content/H1.png</File>
@@ -20,11 +21,18 @@
     <File>C:/Users/Admin/Documents/GitHub/escapeNexus/P_EscapeNexus/Content/mur2.png</File>
     <File>C:/Users/Admin/Documents/GitHub/escapeNexus/P_EscapeNexus/Content/mur3.png</File>
     <File>C:/Users/Admin/Documents/GitHub/escapeNexus/P_EscapeNexus/Content/mur4.png</File>
+    <File>C:/Users/Admin/Documents/GitHub/escapeNexus/P_EscapeNexus/Content/mur5.png</File>
+    <File>C:/Users/Admin/Documents/GitHub/escapeNexus/P_EscapeNexus/Content/mur6.png</File>
+    <File>C:/Users/Admin/Documents/GitHub/escapeNexus/P_EscapeNexus/Content/mur6SansOutils.png</File>
     <File>C:/Users/Admin/Documents/GitHub/escapeNexus/P_EscapeNexus/Content/murPanneauOuvert.png</File>
     <File>C:/Users/Admin/Documents/GitHub/escapeNexus/P_EscapeNexus/Content/mute.png</File>
+    <File>C:/Users/Admin/Documents/GitHub/escapeNexus/P_EscapeNexus/Content/outilsAvecObj.png</File>
+    <File>C:/Users/Admin/Documents/GitHub/escapeNexus/P_EscapeNexus/Content/outilsSansObj.png</File>
     <File>C:/Users/Admin/Documents/GitHub/escapeNexus/P_EscapeNexus/Content/panneauOuvert.png</File>
+    <File>C:/Users/Admin/Documents/GitHub/escapeNexus/P_EscapeNexus/Content/porteOuverte.png</File>
     <File>C:/Users/Admin/Documents/GitHub/escapeNexus/P_EscapeNexus/Content/SpaceSong.mp3</File>
     <File>C:/Users/Admin/Documents/GitHub/escapeNexus/P_EscapeNexus/Content/startBtn.png</File>
+    <File>C:/Users/Admin/Documents/GitHub/escapeNexus/P_EscapeNexus/Content/tournevis.png</File>
     <File>C:/Users/Admin/Documents/GitHub/escapeNexus/P_EscapeNexus/Content/unmute.png</File>
   </SourceFiles>
   <DestFiles>
@@ -32,6 +40,14 @@
     <File>commande.png</File>
     <File>exit.png</File>
     <File>reglage.png</File>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
