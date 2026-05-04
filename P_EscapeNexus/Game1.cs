@@ -152,7 +152,7 @@ namespace P_EscapeNexus
             // Console de messages affichée en jeu
             MessageConsole messageConsole = new MessageConsole(
                 Content.Load<SpriteFont>("DefaultFont"),
-                new Vector2(745, 525)
+                new Vector2(775, 565)
             );
 
             // Puzzle du panneau électrique

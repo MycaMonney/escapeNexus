@@ -378,7 +378,7 @@ namespace P_EscapeNexus
 
             sb.Draw(
                 commande,
-                new Rectangle(720, 490, 1080 / 3, 720 / 3),
+                new Rectangle(730, 450, 1080 / 3, 720 / 2),
                 Color.White
             );
 
