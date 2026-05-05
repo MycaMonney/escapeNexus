@@ -1,13 +1,16 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace P_EscapeNexus
 {
     /// <summary>
-    /// Gère l'écran principal du jeu.
-    /// Contrôle les interactions du joueur avec les murs, l'inventaire,
-    /// les puzzles, les portes, les hitbox et les changements de salle.
+    /// Gère l'écran de jeu principal.
+    /// Contrôle les interactions du joueur avec l'environnement : murs, objets,
+    /// inventaire, puzzles et portes.
+    /// Gère la progression dans les salles, les conditions d'accès (badge, électricité, objets)
+    /// ainsi que le déclenchement de la victoire.
     /// </summary>
     public class PlayingScreen
     {
@@ -59,7 +62,8 @@ namespace P_EscapeNexus
             this.digicodePuzzle = digicodePuzzle;
             this.tableauPuzzle = tableauPuzzle;
         }
-        public void Update(MouseState mouse, MouseState prev)
+
+        public void Update(MouseState mouse, MouseState prev, Action afficherVictoire)
         {
             Rectangle flecheGauche = new Rectangle(10, 300, 100, 100);
             Rectangle flecheDroite = new Rectangle(970, 300, 100, 100);
@@ -70,8 +74,8 @@ namespace P_EscapeNexus
             Rectangle outilsHitbox = new Rectangle(573, 182, 230, 182);
             Rectangle objetZoomHitbox = new Rectangle(285, 150, 95, 430);
 
-            Rectangle digicodeHitbox = new Rectangle(666, 328, 50, 80); // mur7 = index 6
-            Rectangle tableauHitbox = new Rectangle(380, 220, 330, 190); // mur8 = index 7
+            Rectangle digicodeHitbox = new Rectangle(666, 328, 50, 80);
+            Rectangle tableauHitbox = new Rectangle(380, 220, 330, 190);
 
             Rectangle combinaisonHitbox = new Rectangle(450, 160, 180, 400);
             Rectangle badgeHitbox = new Rectangle(310, 320, 50, 80);
@@ -91,7 +95,6 @@ namespace P_EscapeNexus
 
                 return;
             }
-
 
             digicodePuzzle.Update(mouse, prev);
 
@@ -198,14 +201,14 @@ namespace P_EscapeNexus
                     console.Add("Vous n'avez pas encore le tournevis.");
                 }
                 else if (room.CurrentMurIndex == 6 &&
-                    porteHitbox.Contains(mouse.Position) &&
-                    room.PorteDigicodeOuverte)
+                         porteHitbox.Contains(mouse.Position) &&
+                         room.PorteDigicodeOuverte)
                 {
                     room.EntrerTroisiemePiece();
                     console.Add("Vous entrez dans la troisieme piece.");
                 }
                 else if (room.CurrentMurIndex == 8 &&
-                    porteHitbox.Contains(mouse.Position))
+                         porteHitbox.Contains(mouse.Position))
                 {
                     room.RevenirDeuxiemePiece();
                     console.Add("Vous revenez dans la deuxieme piece.");
@@ -243,7 +246,7 @@ namespace P_EscapeNexus
                     console.Add("La porte est verrouillee.");
                 }
                 else if (room.CurrentMurIndex == 9 &&
-                combinaisonHitbox.Contains(mouse.Position))
+                         combinaisonHitbox.Contains(mouse.Position))
                 {
                     if (!room.CombinaisonPrise)
                     {
@@ -256,7 +259,7 @@ namespace P_EscapeNexus
                     }
                 }
                 else if (room.CurrentMurIndex == 11 &&
-                badgeHitbox.Contains(mouse.Position))
+                         badgeHitbox.Contains(mouse.Position))
                 {
                     if (room.CombinaisonPrise && inventory.BadgeSelectionne)
                     {
@@ -271,6 +274,12 @@ namespace P_EscapeNexus
                     {
                         console.Add("Il vous manque la combinaison.");
                     }
+                }
+                else if (room.CurrentMurIndex == 11 &&
+                         porteHitbox.Contains(mouse.Position) &&
+                         room.PorteFinaleOuverte)
+                {
+                    afficherVictoire();
                 }
             }
 
@@ -305,11 +314,11 @@ namespace P_EscapeNexus
             Rectangle casierHitbox = new Rectangle(777, 186, 150, 215);
             Rectangle outilsHitbox = new Rectangle(573, 182, 230, 182);
 
-            Rectangle digicodeHitbox = new Rectangle(666, 328, 50, 80); // mur7 = index 6
-            Rectangle tableauHitbox = new Rectangle(380, 220, 330, 190); // mur8 = index 7
+            Rectangle digicodeHitbox = new Rectangle(666, 328, 50, 80);
+            Rectangle tableauHitbox = new Rectangle(380, 220, 330, 190);
 
             Rectangle combinaisonHitbox = new Rectangle(450, 160, 180, 400);
-            Rectangle badgeHitbox = new Rectangle(310, 320, 50, 80); 
+            Rectangle badgeHitbox = new Rectangle(310, 320, 50, 80);
 
             Texture2D mur = room.GetMurActuel(inventory.TournevisPris);
 
@@ -325,32 +334,26 @@ namespace P_EscapeNexus
             }
 
             if (room.CurrentMurIndex == 2)
-            {
                 debug.Draw(sb, casierHitbox, Color.Red);
-            }
 
             if (room.CurrentMurIndex == 5)
-            {
                 debug.Draw(sb, outilsHitbox, Color.Red);
-            }
 
             if (room.CurrentMurIndex == 6)
-            {
                 debug.Draw(sb, digicodeHitbox, Color.Green);
-            }
 
             if (room.CurrentMurIndex == 7)
-            {
                 debug.Draw(sb, tableauHitbox, Color.Green);
-            }
+
             if (room.CurrentMurIndex == 9)
-            {
                 debug.Draw(sb, combinaisonHitbox, Color.Yellow);
-            }
 
             if (room.CurrentMurIndex == 11)
             {
                 debug.Draw(sb, badgeHitbox, Color.Blue);
+
+                if (room.PorteFinaleOuverte)
+                    debug.Draw(sb, porteHitbox, Color.Red);
             }
 
             debug.Draw(sb, flecheGauche, Color.Red);

@@ -41,10 +41,7 @@ namespace P_EscapeNexus
         {
             sb.Draw(background, new Rectangle(0, 0, 1080, 720), Color.White);
 
-            startBtn.Draw(sb);
-            reglageBtn.Draw(sb);
-            exitBtn.Draw(sb);
-
+            // Hitbox visibles seulement si F1 est activé
             debug.Draw(sb, startBtn.Rectangle, Color.Red);
             debug.Draw(sb, reglageBtn.Rectangle, Color.Green);
             debug.Draw(sb, exitBtn.Rectangle, Color.Blue);

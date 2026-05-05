@@ -30,7 +30,6 @@ C:\Users\Admin\Documents\GitHub\escapeNexus\P_EscapeNexus\bin\Debug\net8.0-windo
 C:\Users\Admin\Documents\GitHub\escapeNexus\P_EscapeNexus\bin\Debug\net8.0-windows\Content\H3.xnb
 C:\Users\Admin\Documents\GitHub\escapeNexus\P_EscapeNexus\bin\Debug\net8.0-windows\Content\H4.xnb
 C:\Users\Admin\Documents\GitHub\escapeNexus\P_EscapeNexus\bin\Debug\net8.0-windows\Content\Menu.xnb
-C:\Users\Admin\Documents\GitHub\escapeNexus\P_EscapeNexus\bin\Debug\net8.0-windows\Content\startBtn.xnb
 C:\Users\Admin\Documents\GitHub\escapeNexus\P_EscapeNexus\bin\Debug\net8.0-windows\Content\SpaceSong.wma
 C:\Users\Admin\Documents\GitHub\escapeNexus\P_EscapeNexus\bin\Debug\net8.0-windows\Content\SpaceSong.xnb
 C:\Users\Admin\Documents\GitHub\escapeNexus\P_EscapeNexus\bin\Debug\net8.0-windows\Content\mute.xnb
@@ -63,9 +62,10 @@ C:\Users\Admin\Documents\GitHub\escapeNexus\P_EscapeNexus\bin\Debug\net8.0-windo
 C:\Users\Admin\Documents\GitHub\escapeNexus\P_EscapeNexus\bin\Debug\net8.0-windows\Content\mur12PorteOuverte.xnb
 C:\Users\Admin\Documents\GitHub\escapeNexus\P_EscapeNexus\bin\Debug\net8.0-windows\Content\badge.xnb
 C:\Users\Admin\Documents\GitHub\escapeNexus\P_EscapeNexus\bin\Debug\net8.0-windows\Content\commande.xnb
-C:\Users\Admin\Documents\GitHub\escapeNexus\P_EscapeNexus\bin\Debug\net8.0-windows\Content\exit.xnb
 C:\Users\Admin\Documents\GitHub\escapeNexus\P_EscapeNexus\bin\Debug\net8.0-windows\Content\mur8postitDroite.xnb
 C:\Users\Admin\Documents\GitHub\escapeNexus\P_EscapeNexus\bin\Debug\net8.0-windows\Content\mur8postitGauche.xnb
 C:\Users\Admin\Documents\GitHub\escapeNexus\P_EscapeNexus\bin\Debug\net8.0-windows\Content\mur8Tableau.xnb
 C:\Users\Admin\Documents\GitHub\escapeNexus\P_EscapeNexus\bin\Debug\net8.0-windows\Content\panneauOuvert.xnb
-C:\Users\Admin\Documents\GitHub\escapeNexus\P_EscapeNexus\bin\Debug\net8.0-windows\Content\reglage.xnb
+C:\Users\Admin\Documents\GitHub\escapeNexus\P_EscapeNexus\bin\Debug\net8.0-windows\Content\H5.xnb
+C:\Users\Admin\Documents\GitHub\escapeNexus\P_EscapeNexus\bin\Debug\net8.0-windows\Content\defaite.xnb
+C:\Users\Admin\Documents\GitHub\escapeNexus\P_EscapeNexus\bin\Debug\net8.0-windows\Content\victoire.xnb

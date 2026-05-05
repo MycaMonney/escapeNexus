@@ -7,115 +7,121 @@ namespace P_EscapeNexus
 {
     /// <summary>
     /// Classe principale du jeu.
-    /// Gère les états (menu, jeu, intro) ainsi que le chargement et l'affichage.
+    /// Gère la boucle du jeu, les différents états (menu, intro, jeu, victoire, défaite),
+    /// le chronomètre de 10 minutes, ainsi que les transitions entre les écrans.
+    /// S'occupe également du chargement des ressources, de l'affichage global
+    /// et des interactions utilisateur liées à l'interface (boutons, clics).
     /// </summary>
     public class Game1 : Game
     {
-        // Les états du jeu
         private enum State
         {
             Menu,
             Reglage,
             Intro,
-            Playing
+            Playing,
+            Victoire,
+            Defaite
         }
 
-        // Gestion de la fenêtre et de l'affichage
         private GraphicsDeviceManager _graphics;
         private SpriteBatch _spriteBatch;
 
-        // Sauvegarde de l'état précédent de la souris et du clavier
         private MouseState previousMouseState;
         private KeyboardState previousKeyboardState;
 
-        // État actuel du jeu
-        private State currentState = State.Playing;
+        private State currentState = State.Victoire;
 
-        // Gestion des hitbox en mode debug
         private HitboxDebug hitboxDebug;
-
-        // Gestion de la musique
         private AudioManager audioManager;
 
-        // Les différents écrans du jeu
         private MenuScreen menuScreen;
         private ReglageScreen reglageScreen;
         private IntroScreen introScreen;
         private PlayingScreen playingScreen;
 
+        private Texture2D victoireTexture;
+        private Texture2D defaiteTexture;
+
+        private SpriteFont timerFont;
+
+        private double tempsRestant = 600;
+        private bool chronoLance = false;
+
+        private Rectangle btnRejouer;
+        private Rectangle btnQuitter;
+        private Rectangle btnMenuVictoire;
+
         public Game1()
         {
-            // Initialisation de la fenêtre du jeu
             _graphics = new GraphicsDeviceManager(this);
-
-            // Dossier où se trouvent les images, sons, polices, etc.
             Content.RootDirectory = "Content";
-
-            // Affiche le curseur de la souris
             IsMouseVisible = true;
 
-            // Taille de la fenêtre
             _graphics.PreferredBackBufferWidth = 1080;
             _graphics.PreferredBackBufferHeight = 720;
         }
 
         protected override void LoadContent()
         {
-            // Permet de dessiner les textures à l'écran
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // Initialise le système de debug des hitbox
             hitboxDebug = new HitboxDebug(GraphicsDevice);
 
-            // Chargement des textures du menu
             Texture2D menuTexture = Content.Load<Texture2D>("Menu");
-            Texture2D textureBtnStart = Content.Load<Texture2D>("startBtn");
-            Texture2D textureBtnExit = Content.Load<Texture2D>("exit");
-            Texture2D textureBtnReglage = Content.Load<Texture2D>("reglage");
             Texture2D textureBtnMute = Content.Load<Texture2D>("mute");
             Texture2D textureBtnPlay = Content.Load<Texture2D>("unmute");
 
-            // Chargement et création du gestionnaire audio
+            victoireTexture = Content.Load<Texture2D>("victoire");
+            defaiteTexture = Content.Load<Texture2D>("defaite");
+
+            timerFont = Content.Load<SpriteFont>("DefaultFont");
+
             audioManager = new AudioManager(Content.Load<Song>("SpaceSong"));
 
-            // Création de l'écran du menu principal
             menuScreen = new MenuScreen(
                 menuTexture,
-                new GameButton(textureBtnStart, new Rectangle(450, 220, 1080 / 5, 720 / 6)),
-                new GameButton(textureBtnReglage, new Rectangle(450, 350, 1080 / 5, 720 / 6)),
-                new GameButton(textureBtnExit, new Rectangle(450, 480, 1080 / 5, 720 / 6)),
+                new GameButton(new Rectangle(80, 248, 340, 100)),
+                new GameButton(new Rectangle(80, 368, 340, 100)),
+                new GameButton(new Rectangle(80, 490, 340, 100)),
                 hitboxDebug
             );
 
-            // Création de l'écran des réglages
             reglageScreen = new ReglageScreen(
-                menuTexture,
                 textureBtnMute,
                 textureBtnPlay,
-                new GameButton(textureBtnPlay, new Rectangle(450, 220, 1080 / 5, 720 / 6)),
+                new GameButton(new Rectangle(190, 335, 295, 95)),
+                new GameButton(new Rectangle(68, 610, 165, 60)),
                 audioManager,
                 hitboxDebug
             );
 
-            // Création de l'introduction avec plusieurs images
+            btnRejouer = new Rectangle(92, 570, 240, 50);
+            btnQuitter = new Rectangle(376, 570, 220, 50);
+            btnMenuVictoire = new Rectangle(120, 490, 310, 50);
+
+            CreerNouvellePartie();
+        }
+
+        private void CreerNouvellePartie()
+        {
             introScreen = new IntroScreen(
                 new Texture2D[]
                 {
                     Content.Load<Texture2D>("H1"),
                     Content.Load<Texture2D>("H2"),
                     Content.Load<Texture2D>("H3"),
-                    Content.Load<Texture2D>("H4")
+                    Content.Load<Texture2D>("H4"),
+                    Content.Load<Texture2D>("H5")
                 }
             );
 
-            // Puzzle du tableau sur le mur 8
             TableauPuzzle tableauPuzzle = new TableauPuzzle(
                 Content.Load<Texture2D>("mur8Tableau"),
                 Content.Load<Texture2D>("mur8postitGauche"),
                 Content.Load<Texture2D>("mur8postitDroite")
             );
 
-            // Gestion des murs et des salles
             RoomManager roomManager = new RoomManager(
                 new Texture2D[]
                 {
@@ -140,7 +146,6 @@ namespace P_EscapeNexus
                 Content.Load<Texture2D>("mur12PorteOuverte")
             );
 
-            // Gestion de l'inventaire
             InventoryManager inventoryManager = new InventoryManager(
                 Content.Load<Texture2D>("inventaire"),
                 Content.Load<Texture2D>("badge"),
@@ -149,26 +154,22 @@ namespace P_EscapeNexus
                 720
             );
 
-            // Console de messages affichée en jeu
             MessageConsole messageConsole = new MessageConsole(
                 Content.Load<SpriteFont>("DefaultFont"),
                 new Vector2(775, 565)
             );
 
-            // Puzzle du panneau électrique
             ElectricPanelPuzzle electricPanelPuzzle = new ElectricPanelPuzzle(
                 GraphicsDevice,
                 Content.Load<Texture2D>("panneauOuvert")
             );
 
-            // Puzzle du digicode
             DigicodePuzzle digicodePuzzle = new DigicodePuzzle(
                 GraphicsDevice,
                 Content.Load<Texture2D>("digicode"),
                 Content.Load<SpriteFont>("DefaultFont")
             );
 
-            // Création de l'écran principal de jeu
             playingScreen = new PlayingScreen(
                 roomManager,
                 inventoryManager,
@@ -183,37 +184,40 @@ namespace P_EscapeNexus
                 digicodePuzzle,
                 tableauPuzzle
             );
+
+            tempsRestant = 600;
+            chronoLance = false;
         }
 
         protected override void Update(GameTime gameTime)
         {
-            // Récupère l'état actuel de la souris et du clavier
             MouseState mouseState = Mouse.GetState();
             KeyboardState keyboardState = Keyboard.GetState();
 
-            // Active ou désactive l'affichage des hitbox avec F1
+            bool click = mouseState.LeftButton == ButtonState.Pressed &&
+                         previousMouseState.LeftButton == ButtonState.Released;
+
             if (keyboardState.IsKeyDown(Keys.F1) &&
                 previousKeyboardState.IsKeyUp(Keys.F1))
             {
                 hitboxDebug.Enabled = !hitboxDebug.Enabled;
             }
 
-            // Retour au menu avec Échap
             if (keyboardState.IsKeyDown(Keys.Escape))
             {
                 currentState = State.Menu;
+                chronoLance = false;
             }
 
-            // Met à jour la musique
             audioManager.Update();
 
-            // Met à jour l'écran selon l'état actuel du jeu
             if (currentState == State.Menu)
             {
                 menuScreen.Update(mouseState, previousMouseState);
 
                 if (menuScreen.StartClicked)
                 {
+                    CreerNouvellePartie();
                     introScreen.Reset();
                     currentState = State.Intro;
                 }
@@ -231,6 +235,11 @@ namespace P_EscapeNexus
             else if (currentState == State.Reglage)
             {
                 reglageScreen.Update(mouseState, previousMouseState);
+
+                if (reglageScreen.BackClicked)
+                {
+                    currentState = State.Menu;
+                }
             }
             else if (currentState == State.Intro)
             {
@@ -238,15 +247,60 @@ namespace P_EscapeNexus
 
                 if (introScreen.Finished)
                 {
+                    tempsRestant = 600;
+                    chronoLance = true;
                     currentState = State.Playing;
                 }
             }
             else if (currentState == State.Playing)
             {
-                playingScreen.Update(mouseState, previousMouseState);
+                if (chronoLance)
+                {
+                    tempsRestant -= gameTime.ElapsedGameTime.TotalSeconds;
+                }
+
+                if (tempsRestant <= 0)
+                {
+                    tempsRestant = 0;
+                    chronoLance = false;
+                    currentState = State.Defaite;
+                }
+                else
+                {
+                    playingScreen.Update(mouseState, previousMouseState, () =>
+                    {
+                        chronoLance = false;
+                        currentState = State.Victoire;
+                    });
+                }
+            }
+            else if (currentState == State.Defaite)
+            {
+                if (click)
+                {
+                    if (btnRejouer.Contains(mouseState.Position))
+                    {
+                        CreerNouvellePartie();
+                        introScreen.Reset();
+                        currentState = State.Intro;
+                    }
+                    else if (btnQuitter.Contains(mouseState.Position))
+                    {
+                        Exit();
+                    }
+                }
+            }
+            else if (currentState == State.Victoire)
+            {
+                if (click)
+                {
+                    if (btnMenuVictoire.Contains(mouseState.Position))
+                    {
+                        currentState = State.Menu;
+                    }
+                }
             }
 
-            // Sauvegarde les états actuels souris/clavier pour les comparer à la prochaine frame
             previousMouseState = mouseState;
             previousKeyboardState = keyboardState;
 
@@ -255,24 +309,67 @@ namespace P_EscapeNexus
 
         protected override void Draw(GameTime gameTime)
         {
-            // Nettoie l'écran avant de redessiner
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             _spriteBatch.Begin();
 
-            // Dessine l'écran correspondant à l'état actuel
             if (currentState == State.Menu)
+            {
                 menuScreen.Draw(_spriteBatch);
+            }
             else if (currentState == State.Reglage)
+            {
                 reglageScreen.Draw(_spriteBatch);
+            }
             else if (currentState == State.Intro)
+            {
                 introScreen.Draw(_spriteBatch);
+            }
             else if (currentState == State.Playing)
+            {
                 playingScreen.Draw(_spriteBatch);
+                DrawTimer();
+            }
+            else if (currentState == State.Victoire)
+            {
+                _spriteBatch.Draw(
+                    victoireTexture,
+                    new Rectangle(0, 0, 1080, 720),
+                    Color.White
+                );
+
+                hitboxDebug.Draw(_spriteBatch, btnMenuVictoire, Color.Blue);
+            }
+            else if (currentState == State.Defaite)
+            {
+                _spriteBatch.Draw(
+                    defaiteTexture,
+                    new Rectangle(0, 0, 1080, 720),
+                    Color.White
+                );
+
+                hitboxDebug.Draw(_spriteBatch, btnRejouer, Color.Green);
+                hitboxDebug.Draw(_spriteBatch, btnQuitter, Color.Red);
+            }
 
             _spriteBatch.End();
 
             base.Draw(gameTime);
+        }
+
+        private void DrawTimer()
+        {
+            int minutes = (int)tempsRestant / 60;
+            int secondes = (int)tempsRestant % 60;
+
+            string timerTexte = minutes.ToString("00") + ":" + secondes.ToString("00");
+
+            _spriteBatch.DrawString(
+                timerFont,
+                timerTexte,
+                new Vector2(30, 30),
+                Color.White
+            );
         }
     }
 }

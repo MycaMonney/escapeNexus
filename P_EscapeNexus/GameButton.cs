@@ -9,14 +9,13 @@ namespace P_EscapeNexus
     /// Permet de détecter les clics de la souris sur une zone donnée
     /// et d'afficher une texture associée.
     /// </summary>
+
     public class GameButton
     {
         public Rectangle Rectangle { get; private set; }
-        private Texture2D texture;
 
-        public GameButton(Texture2D texture, Rectangle rectangle)
+        public GameButton(Rectangle rectangle)
         {
-            this.texture = texture;
             Rectangle = rectangle;
         }
 
@@ -25,11 +24,6 @@ namespace P_EscapeNexus
             return mouseState.LeftButton == ButtonState.Pressed &&
                    previousMouseState.LeftButton == ButtonState.Released &&
                    Rectangle.Contains(mouseState.Position);
-        }
-
-        public void Draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(texture, Rectangle, Color.White);
         }
     }
 }

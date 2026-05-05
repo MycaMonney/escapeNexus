@@ -11,39 +11,58 @@ namespace P_EscapeNexus
     /// </summary>
     public class ReglageScreen
     {
-        private Texture2D background;
-        private Texture2D mute;
-        private Texture2D unmute;
-        private GameButton btn;
-        private AudioManager audio;
+        private Texture2D imageMute;
+        private Texture2D imageUnmute;
+
+        private GameButton soundButton;
+        private GameButton backButton;
+
+        private AudioManager audioManager;
         private HitboxDebug debug;
 
-        public ReglageScreen(Texture2D bg, Texture2D mute, Texture2D unmute, GameButton btn, AudioManager audio, HitboxDebug debug)
+        public bool BackClicked { get; private set; }
+
+        public ReglageScreen(
+            Texture2D mute,
+            Texture2D unmute,
+            GameButton soundBtn,
+            GameButton backBtn,
+            AudioManager audio,
+            HitboxDebug debug)
         {
-            background = bg;
-            this.mute = mute;
-            this.unmute = unmute;
-            this.btn = btn;
-            this.audio = audio;
+            imageMute = mute;
+            imageUnmute = unmute;
+            soundButton = soundBtn;
+            backButton = backBtn;
+            audioManager = audio;
             this.debug = debug;
         }
 
         public void Update(MouseState mouse, MouseState prev)
         {
-            if (btn.IsClicked(mouse, prev))
-                audio.ToggleMute();
+            // reset à chaque frame
+            BackClicked = false;
+
+            if (soundButton.IsClicked(mouse, prev))
+            {
+                audioManager.ToggleMute();
+            }
+
+            if (backButton.IsClicked(mouse, prev))
+            {
+                BackClicked = true;
+            }
         }
 
         public void Draw(SpriteBatch sb)
         {
-            sb.Draw(background, new Rectangle(0, 0, 1080, 720), Color.White);
+            Texture2D currentImage = audioManager.IsMuted ? imageMute : imageUnmute;
 
-            if (audio.IsMuted)
-                sb.Draw(mute, btn.Rectangle, Color.White);
-            else
-                sb.Draw(unmute, btn.Rectangle, Color.White);
+            sb.Draw(currentImage, new Rectangle(0, 0, 1080, 720), Color.White);
 
-            debug.Draw(sb, btn.Rectangle, Color.Red);
+            // Debug
+            debug.Draw(sb, soundButton.Rectangle, Color.Yellow);
+            debug.Draw(sb, backButton.Rectangle, Color.Red);
         }
     }
 }
