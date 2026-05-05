@@ -30,7 +30,7 @@ namespace P_EscapeNexus
         private MouseState previousMouseState;
         private KeyboardState previousKeyboardState;
 
-        private State currentState = State.Victoire;
+        private State currentState = State.Menu;
 
         private HitboxDebug hitboxDebug;
         private AudioManager audioManager;
